@@ -27,7 +27,7 @@ Route::get('/users', function() {
     return json_encode($users);
 });
 
-Route::get('/users/{userId}', function($userId) {
-    $user = User::find($userId);
+Route::get('/users/{user}', function($user) {
+    // $user = User::find($userId);
     return json_encode($user);
 });
