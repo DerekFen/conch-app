@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Models\User;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,34 +20,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-/* very temporary user storage */
-class User
-{
-    public $id;
-    public $name;
-    public function __construct($id,$name) {
-        $this->id = $id;
-        $this->name = $name;
-    }
-}
-
-function initUsers() {
-    global $users;
-    $users[] = new User(0,'Derek');
-    $users[] = new User(1,'Sam');
-    $users[] = new User(2,'Niels');
-}
-
 /* example inline routes */
 
 Route::get('/users', function() {
-    global $users;
-    initUsers();
+    $users = User::all();
     return json_encode($users);
 });
 
 Route::get('/users/{userId}', function($userId) {
-    global $users;
-    initUsers();
-    return json_encode($users[$userId]);
+    $user = User::find($userId);
+    return json_encode($user);
 });
