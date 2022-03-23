@@ -23,11 +23,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 /* example inline routes */
 
 Route::get('/users', function() {
-    $users = User::all();
-    return json_encode($users);
+    return json_encode(User::all());
 });
 
-Route::get('/users/{user}', function($user) {
-    // $user = User::find($userId);
-    return json_encode($user);
+Route::get('/users/{userId}', function($userId) {
+    return json_encode(User::find($userId));
 });
